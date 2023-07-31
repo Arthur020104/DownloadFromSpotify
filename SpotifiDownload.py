@@ -42,18 +42,18 @@ def remove_file(file_path):
         print(f"Error: {e}")
 
 
-def main():
+def DownloadFromPlaylist(path,PLAYLIST_URL):
  # Replace these with your actual credentials
     CLIENT_ID = '0678d61d43af480db57f5855d9feca0d'
-    CLIENT_SECRET = 'SECRET'
+    CLIENT_SECRET = 'key'
 
     # Replace this with the Spotify playlist link you want to get songs from
-    if len(sys.argv) != 2 :
-        print("Use: SpotifiDownload LINK_DA_PLAYLIST")
-        return
+    #if len(sys.argv) != 2 :
+    #    print("Use: SpotifiDownload LINK_DA_PLAYLIST")
+     #   return
 
     # Get the command-line arguments (excluding the script name)
-    PLAYLIST_URL = sys.argv[1]
+    #PLAYLIST_URL = sys.argv[1]
 
     songs, input_songs = get_spotify_playlist_tracks(PLAYLIST_URL, CLIENT_ID, CLIENT_SECRET)
     #songs = list(set(songs))
@@ -64,19 +64,20 @@ def main():
             remove_last_line()
             print(f"{i}. Baixando {songs[i]}")
             try:
-                DownloadAudio(input_songs[i],songs[i],1)
+                DownloadAudio(input_songs[i],songs[i],1,path)
             except:
                 continue
         remove_last_line()
-        print("Done")
+        print("Finalizado")
+        return 0, "Finalizado"
     else:
-        print("No songs found in the playlist.")
+        return 1, "Nenhuma música encontrada nessa playlist."
 
 def remove_last_line():
     sys.stdout.write('\033[F')  # Move cursor to the beginning of the previous line
     sys.stdout.write('\033[K')  # Clear the line
     sys.stdout.flush()
 
-if __name__ == "__main__":
-   main()
+#if __name__ == "__main__":
+ #  main()
 

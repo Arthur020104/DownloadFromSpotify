@@ -5,15 +5,10 @@ import re
 import subprocess
 import sys
 
-login = os.getlogin()
-path = f"C:/Usuários/{login}/Área de Trabalho/" if os.path.exists(f"C:/Usuários/{login}/Área de Trabalho/") else f"C:/Users/{login}/OneDrive/Área de Trabalho/" if os.path.exists(f"C:/Users/{login}/OneDrive/Área de Trabalho/") else f"C:/Users/{login}/Desktop/"
-def DownloadAudio(link,filename,onlyaudio):
-    try:
-        os.makedirs(f"{path}/Audio")
-        #print(f"Folder Audio created successfully.")
-    except OSError as e:
-        if not os.path.isdir(f"{path}/Audio"):
-            print(f"Error: {e}")
+#login = os.getlogin()
+#path = f"C:/Usuários/{login}/Área de Trabalho/" if os.path.exists(f"C:/Usuários/{login}/Área de Trabalho/") else f"C:/Users/{login}/OneDrive/Área de Trabalho/" if os.path.exists(f"C:/Users/{login}/OneDrive/Área de Trabalho/") else f"C:/Users/{login}/Desktop/"
+def DownloadAudio(link,filename,onlyaudio,path):
+    
 
     audio = 0
     qualaudio = []
@@ -44,20 +39,20 @@ def DownloadAudio(link,filename,onlyaudio):
     audiotype= audiotype[0:audiotype.find('"')]
     if onlyaudio == 1:
         i = 0
-        existi_aquivo_com_msm_nome = os.path.exists(f"{path}/Audio/"+filename+'.'+audiotype) or os.path.exists(f"{path}/Audio/"+filename+'.mp3')
+        existi_aquivo_com_msm_nome = os.path.exists(f"{path}/"+filename+'.'+audiotype) or os.path.exists(f"{path}/"+filename+'.mp3')
         while existi_aquivo_com_msm_nome:
             i +=1
             filename = f"{filename}{i}"
         try:
             
-            audio.download(f"{path}/Audio",filename = filename+'.'+audiotype)
+            audio.download(f"{path}",filename = filename+'.'+audiotype)
         except:
             print(f"ERROR: Erro em baixar {filename}")
         if audiotype != 'mp3':
-            src = (f"{path}/Audio/"+filename+'.'+audiotype)
-            dst = (f"{path}/Audio/"+filename+'.mp3')
+            src = (f"{path}/"+filename+'.'+audiotype)
+            dst = (f"{path}/"+filename+'.mp3')
             subprocess.run(f'ffmpeg -i "{src}" "{dst}"',shell=False,capture_output=False,stdout=False,stderr=False)
-            os.remove(f"{path}/Audio/"+filename+'.'+audiotype)
+            os.remove(f"{path}/"+filename+'.'+audiotype)
             return
         return
 def retornarpesquisa(frase, acao,audioo):
