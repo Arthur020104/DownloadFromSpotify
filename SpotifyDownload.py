@@ -13,7 +13,6 @@ def get_spotify_playlist_tracks(playlist_url, client_id, client_secret):
     playlist_id = playlist_url.split('/')[-1].split('?')[0]
 
     # Get the playlist data
-    #artist = sp.playlist
     results = sp.playlist_tracks(playlist_id)
     #print(results)
     tracks = results['items']
@@ -46,18 +45,7 @@ def DownloadFromPlaylist(path,PLAYLIST_URL):
  # Replace these with your actual credentials
     CLIENT_ID = '0678d61d43af480db57f5855d9feca0d'
     CLIENT_SECRET = 'key'
-
-    # Replace this with the Spotify playlist link you want to get songs from
-    #if len(sys.argv) != 2 :
-    #    print("Use: SpotifiDownload LINK_DA_PLAYLIST")
-     #   return
-
-    # Get the command-line arguments (excluding the script name)
-    #PLAYLIST_URL = sys.argv[1]
-
     songs, input_songs = get_spotify_playlist_tracks(PLAYLIST_URL, CLIENT_ID, CLIENT_SECRET)
-    #songs = list(set(songs))
-    #input_songs = list(set(input_songs))
     if songs:
         print("\n")
         for i in range(len(songs)):
@@ -78,6 +66,4 @@ def remove_last_line():
     sys.stdout.write('\033[K')  # Clear the line
     sys.stdout.flush()
 
-#if __name__ == "__main__":
- #  main()
 

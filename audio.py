@@ -5,11 +5,7 @@ import re
 import subprocess
 import sys
 
-#login = os.getlogin()
-#path = f"C:/Usuários/{login}/Área de Trabalho/" if os.path.exists(f"C:/Usuários/{login}/Área de Trabalho/") else f"C:/Users/{login}/OneDrive/Área de Trabalho/" if os.path.exists(f"C:/Users/{login}/OneDrive/Área de Trabalho/") else f"C:/Users/{login}/Desktop/"
 def DownloadAudio(link,filename,onlyaudio,path):
-    
-
     audio = 0
     qualaudio = []
 
@@ -43,9 +39,10 @@ def DownloadAudio(link,filename,onlyaudio,path):
         while existi_aquivo_com_msm_nome:
             i +=1
             filename = f"{filename}{i}"
+            existi_aquivo_com_msm_nome = os.path.exists(f"{path}/"+filename+'.'+audiotype) or os.path.exists(f"{path}/"+filename+'.mp3')
         try:
             
-            audio.download(f"{path}",filename = filename+'.'+audiotype)
+            audio.download(f"{path}/",filename = filename+'.'+audiotype)
         except:
             print(f"ERROR: Erro em baixar {filename}")
         if audiotype != 'mp3':

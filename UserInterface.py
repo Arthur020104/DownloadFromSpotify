@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import filedialog, messagebox,ttk
-from SpotifiDownload import DownloadFromPlaylist
+from SpotifyDownload import DownloadFromPlaylist
 
 def browse_folder_path():
     folder_path = filedialog.askdirectory()
