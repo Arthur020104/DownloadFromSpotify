@@ -7,6 +7,7 @@ import sys
 
 def DownloadAudio(link,filename,onlyaudio,path):
     audio = 0
+    filename = remove_non_ascii_and_symbols(filename)
     qualaudio = []
 
     link = link.replace(" ", "_" )
@@ -41,7 +42,7 @@ def DownloadAudio(link,filename,onlyaudio,path):
             filename = f"{filename}{i}"
             existi_aquivo_com_msm_nome = os.path.exists(f"{path}/"+filename+'.'+audiotype) or os.path.exists(f"{path}/"+filename+'.mp3')
         try:
-            
+        
             audio.download(f"{path}/",filename = filename+'.'+audiotype)
         except:
             print(f"ERROR: Erro em baixar {filename}")
@@ -70,7 +71,12 @@ def retornarpesquisa(frase, acao,audioo):
         except ValueError: 
             return 1
     return name
+import string
 
+def remove_non_ascii_and_symbols(input_string):
+    allowed_chars = string.ascii_letters + string.digits + " "  # Include space
+    cleaned_string = ''.join([char for char in input_string if char in allowed_chars])
+    return cleaned_string
 def resource_path(relative_path):
     """ Get absolute path to resource, works for dev and for PyInstaller """
     try:
