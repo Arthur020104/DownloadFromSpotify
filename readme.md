@@ -15,7 +15,7 @@
 ## Requisitos
 - Python 3.x
 - spotipy
-- pytube
+- yt_dlp
 - youtubesearchpython
 - tkinter
 - ffmpeg
