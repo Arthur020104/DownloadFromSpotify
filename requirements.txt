@@ -1,0 +1,4 @@
+spotipy
+tk
+pytube
+youtube-search-python
